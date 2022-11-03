@@ -1,5 +1,7 @@
-import { useState, useContext } from "react"
-import { useTasksDispatch } from "./TasksContext"
+// https://github.com/ai/nanoid
+import { useState } from "react"
+import { nanoid } from 'nanoid'
+import { useTasksDispatch } from "../contexts/TasksContext"
 
 export default function AddTask({onAddTask}){
     const [text, setText] = useState('');
@@ -14,8 +16,8 @@ export default function AddTask({onAddTask}){
             <button onClick={() => {
                 setText('');
                 dispatch({
+                id: nanoid(),
                 type: 'added',
-                id: nextId++,
                 text: text,
                 });
             }}>
@@ -24,5 +26,3 @@ export default function AddTask({onAddTask}){
         </>
     );
 }
-
-let nextId = 3;

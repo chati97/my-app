@@ -1,13 +1,18 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* 
+  1. CSS파일, CSS 파일에 정의
+* 2. CSS-Preprocessor: CSS 전처리기, sass, less => CSS에서 불편한 것들 => 빌드해서 CSS파일을 output만들어서 이걸 배포 (TOSS)
+  3. Module CSS => 만약에 css파일 너무길어지거나, css파일을 분리 => .box 클래스이름으로 스타일링 .box 클래스이름으로 스타일링 중복
+*** 4. CSS-in-JS: CSS와 같은 스타일링을 JavaScript에서 선언하겠다. => styled-components:3-4년 => template literal, emotion => styled-component 확장 버전, 객체로 만드는 것
+* 5. Funtional CSS, Utility First CSS: TailwindCSS, adroableCSS
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+
+  5. 인라인 스타일 <h1 style={{동적인 애니메이션}}>, 사실 잘 안써, 왜냐하면, 우선순위가 1빠따...
+  둘중하나
+  1. css파일을 link태그를 통해서 가져오거나
+  2. <style></style>
+*/
+
+
+/**
+  Reset CSS, Normalize CSS, 
+*/

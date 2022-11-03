@@ -1,11 +1,17 @@
+// 이 파일 내에서 우리 할 일들을 다 관리
+// 1. 제일 처음에 LocalStorage로 부터 가져오기 이전에 작성된 할일들을
+// 2. 추가 수정, 삭제될때, 그거에 맞게 localStorage업데이트
+// 3. 할일 체크 표시를 하는 작업
+
 import { createContext, useContext, useReducer } from "react";
+import { getTaskStorage, setTaskStorage } from "../utils/storage";
 
 const TasksContext = createContext(null);
 const TasksDispatchContext = createContext(null);
 
 export function TasksProvider({children}) {
     const [tasks, dispatch] = useReducer(
-        tasksReducer, initialTasks
+        tasksReducer, getTaskStorage()
     );
     return (
         <TasksContext.Provider value={tasks}>
@@ -27,32 +33,32 @@ export function useTasksDispatch(){
 function tasksReducer(tasks, action){
     switch(action.type){
         case 'added': {
-            return [...tasks, {
+            const newTasks =  [...tasks, {
                 id: action.id,
                 text: action.text,
                 done: false
             }];
+            setTaskStorage(newTasks)
+            return newTasks
         }
         case 'changed': {
-            return tasks.map(t => {
-                if(t.id === action.task.id){
+            const newTasks = tasks.map(task => {
+                if(task.id === action.task.id){
                     return action.task;
                 } else {
-                    return t;
+                    return task;
                 }
             });
+            setTaskStorage(newTasks)
+            return newTasks
         }
         case 'deleted': {
-            return tasks.filter(t=>t.id !== action.id);
+            const newTasks = tasks.filter(task => task.id !== action.id);
+            setTaskStorage(newTasks)
+            return newTasks
         }
         default:{
-            throw Error('Unknown action: ' + action.type);
+            throw new Error("")
         }
     }
 }
-
-const initialTasks = [
-    { id: 0, text: 'Philosopher’s Path', done: true },
-    { id: 1, text: 'Visit the temple', done: false },
-    { id: 2, text: 'Drink matcha', done: false }
-];
