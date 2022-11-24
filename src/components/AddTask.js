@@ -4,10 +4,22 @@ import { nanoid } from 'nanoid'
 import { useTasksDispatch } from "../contexts/TasksContext"
 import styled from "styled-components";
 
-const IStyle = styled.input`
+
+
+const InputCss = styled.input`
 font-family: 'Dosis', sans-serif;
-margin-left: 60px;
-font-size: 12pt;
+font-size: 10px;
+width: 400px;
+background-color: lightgray;
+`
+
+const BtnCss = styled.button`
+    height: 20px;
+    font-size: 15px;
+
+    color: white;
+    
+    background-color: blue;
 `
 
 export default function AddTask({onAddTask}){
@@ -15,12 +27,12 @@ export default function AddTask({onAddTask}){
     const dispatch = useTasksDispatch();
     return (
         <>
-            <IStyle
-                placeholder="Add task"
+            <InputCss
+                placeholder="할 일을 입력하세요."
                 value={text}
                 onChange={e => setText(e.target.value)}
             />
-            <button onClick={() => {
+            <BtnCss onClick={() => {
                 setText('');
                 dispatch({
                 id: nanoid(),
@@ -28,8 +40,9 @@ export default function AddTask({onAddTask}){
                 text: text,
                 });
             }}>
-                Add
-            </button>
+                등록
+            </BtnCss>
         </>
     );
 }
+

@@ -3,41 +3,43 @@ import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import { TasksProvider } from './contexts/TasksContext';
 import styled from 'styled-components';
-import japanimg from './img/japan.JPG';
 
-const SStyle = styled.div`
-`
-
-const TStyle = styled.h1`
-  width: auto;
-  border-bottom: 3px solid;
-  text-align: left;
+const TitleCss = styled.h1`
   margin-left: 50px;
-  padding-left: 10px;
-  font-size: 30pt;
-  color: black;
+
+  font-size: 30px;
   font-family: 'Dosis', sans-serif;
+  text-align: center;
+
+  color: black;
 `;
 
-const ImgStyle = styled.img`
+const InputCss = styled.div`
+  margin: auto;
+  border: 2px solid blue;
+  height: 20px;
   width: 500px;
-  height: 500px;
-  float: right;
-  margin-right: 200px;
+  border-radius: 5px;
+  box-shadow: 2px 2px gray;
+  background-color: lightgray;
+
+  margin-bottom: 5px;
 `
+
 
 export default function TaskApp(){
 
   return (
-    <SStyle>
-      <TStyle>Tokyo Travel</TStyle>
-      <ImgStyle src={japanimg}/>
+    <div>
+      <TitleCss>Todo List</TitleCss>
       <TasksProvider>
-      <AddTask/>
-      <TaskList/>
-    </TasksProvider>
-    </SStyle>
-    
+        <InputCss>
+        <AddTask/>
+        </InputCss>
+        <TaskList/>
+      </TasksProvider>
+      
+    </div>
   );
 }
 

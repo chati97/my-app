@@ -2,9 +2,23 @@ import { useState } from "react";
 import { useTasksDispatch} from "../contexts/TasksContext";
 import styled from "styled-components";
 
-const BStyle = styled.button`
+const OkBtnCss = styled.button`
+  color: blue;
+  background-color: lightblue;
+`
+
+const ModBtnCss = styled.button`
   color: black;
-  margin-left: 10px;
+`
+
+const DelBtnCss = styled.button`
+  color: red;
+  background-color: #f05650;
+`
+
+const TodoCss = styled.input`
+  color: red;
+  font-size: 10px;
 `
 
 export default function Task({ task }) {
@@ -16,7 +30,7 @@ export default function Task({ task }) {
   if (isEditing) {
     taskContent = (
       <>
-        <input
+        <TodoCss
           value={task.text}
           onChange={e => {
             dispatch({
@@ -27,23 +41,23 @@ export default function Task({ task }) {
               }
             });
           }} />
-        <BStyle onClick={() => setIsEditing(false)}>
-          Save
-        </BStyle>
+        <OkBtnCss onClick={() => setIsEditing(false)}>
+          확인
+        </OkBtnCss>
       </>
     );
   } else {
     taskContent = (
       <>
         {task.text}
-        <BStyle onClick={() => setIsEditing(true)}>
-          Edit
-        </BStyle>
+        <ModBtnCss onClick={() => setIsEditing(true)}>
+          수정
+        </ModBtnCss>
       </>
     );
   }
   return (
-    <label>
+    <>
       <input
         type="checkbox"
         checked={task.done}
@@ -58,14 +72,14 @@ export default function Task({ task }) {
         }}
       />
       {taskContent}
-      <BStyle onClick={() => {
+      <DelBtnCss onClick={() => {
         dispatch({
           type: 'deleted',
           id: task.id
         });
       }}>
-        Delete
-      </BStyle>
-    </label>
+        삭제
+      </DelBtnCss>
+    </>
   );
 }
